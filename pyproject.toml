@@ -1,0 +1,31 @@
+[project]
+name = "whisper-tts"
+authors = [
+{ name = "Enucatl", email = "1423701+Enucatl@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+dependencies = [
+    "click",
+    "pandas",
+    "transformers",
+    "torch",
+    "torchaudio",
+    "torchvision",
+    "pydub",
+]
+dynamic = ["version"]
+
+[build-system]
+requires = [
+    "setuptools >= 61",
+    "wheel",
+    "setuptools-git-versioning",
+]
+build-backend = "setuptools.build_meta"
+
+[tools.setuptools-git-versioning]
+enabled = true
+
+[tool.ruff]
+select = ["ALL"]
