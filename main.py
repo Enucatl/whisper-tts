@@ -2,7 +2,6 @@ import numpy as np
 from transformers import pipeline
 import click
 import pydub
-import torch
 
 
 def pydub_to_np(audio: pydub.AudioSegment) -> np.ndarray:
