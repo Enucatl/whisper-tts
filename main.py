@@ -38,7 +38,7 @@ def main(input_file):
         max_new_tokens=256,
         generate_kwargs={"task": "transcribe"},
         chunk_length_s=30,
-        batch_size=8,
+        batch_size=2,
     )
     print(result)
 
