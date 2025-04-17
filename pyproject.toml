@@ -6,13 +6,9 @@ authors = [
 readme = "README.md"
 requires-python = ">= 3.12"
 dependencies = [
-    "click",
-    "pandas",
-    "transformers",
-    "torch",
-    "torchaudio",
-    "torchvision",
-    "pydub",
+  "click",
+  "deepgram-sdk >= 3, < 4.0",
+  "pandas",
 ]
 dynamic = ["version"]
 
