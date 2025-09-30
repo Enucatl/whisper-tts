@@ -7,9 +7,9 @@ import google.generativeai
 @click.command()
 @click.option("--input-file", type=click.File("rb"), required=True)
 @click.option("--deepgram-api-key", required=True)
-@click.option("--deepgram-model", default="nova-2")
+@click.option("--deepgram-model", default="nova-3")
 @click.option("--google-api-key", default=None)
-@click.option("--google-model", default="gemini-2.5-flash-preview-05-20")
+@click.option("--google-model", default="gemini-2.5-flash-preview-09-2025")
 @click.option("--language", default="it")
 @click.option("--smart_format/--no_smart_format", default=True)
 def _main(
@@ -35,6 +35,9 @@ def _main(
     )
     transcript = response["results"]["channels"][0]["alternatives"][0]["transcript"]
     print(transcript)
+    if not transcript:
+        exception_message = "transcript is empty"
+        raise Exception(exception_message)
     if google_api_key is not None:
         google.generativeai.configure(api_key=google_api_key)
         available_models = [
@@ -43,7 +46,8 @@ def _main(
         if google_model not in available_models:
             for model in sorted(available_models):
                 print(model)
-            raise Exception(f"{google_model=} not in {available_models=}")
+            exception_message = f"{google_model=} not in {available_models=}"
+            raise Exception(exception_message)
         gemini_model = google.generativeai.GenerativeModel(google_model)
         correction_prompt = f"""
             I will copy the raw transcription of an audio, transcribed by AI.
