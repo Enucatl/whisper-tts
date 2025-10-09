@@ -24,5 +24,10 @@ build-backend = "setuptools.build_meta"
 [tools.setuptools-git-versioning]
 enabled = true
 
-[tool.ruff]
+[tool.ruff.lint]
 select = ["ALL"]
+ignore = [
+  "D203",
+  "D213",
+  "COM812",
+]
