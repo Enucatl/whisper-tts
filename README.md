@@ -1,13 +1,20 @@
 # whisper-tts
 
-transcribe an audio file with the whisper model and huggingface transformers
+Transcribe an audio file with Deepgram, then correct the transcript with
+OpenRouter.
 
 ```bash
-/opt/home/user/venv/whisper-tts/bin/python ~/src/whisper-tts/main.py --deepgram-api-key=$(vault kv get -mount=secret -field=deepgram_api_key airflow) --google-api-key $(vault kv get -mount=secret -field=google_aistudio_api_key airflow) --input-file  ~/Downloads/audio.mp3
+uv run whisper-tts --deepgram-api-key="$(vault kv get -mount=secret -field=deepgram_api_key airflow)" --openrouter-api-key="$(vault kv get -mount=kv -field=openrouter_api_key puppet)" --input-file ~/Downloads/audio.mp3
+```
+
+The same command can be run through the new package module directly:
+
+```bash
+uv run python -m whisper_tts.cli --deepgram-api-key="$(vault kv get -mount=secret -field=deepgram_api_key airflow)" --openrouter-api-key="$(vault kv get -mount=kv -field=openrouter_api_key puppet)" --input-file ~/Downloads/audio.mp3
 ```
 
 ## Install
 
 ```bash
-uv pip install --python /opt/home/user/venv/whisper-tts/bin/python -e .
+uv sync
 ```

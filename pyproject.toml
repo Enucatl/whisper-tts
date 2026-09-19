@@ -1,28 +1,23 @@
 [project]
 name = "whisper-tts"
+version = "0.0.0"
 authors = [
 { name = "Enucatl", email = "1423701+Enucatl@users.noreply.github.com" },
 ]
 readme = "README.md"
-requires-python = ">= 3.12"
+requires-python = ">= 3.14"
 dependencies = [
   "click",
   "deepgram-sdk >= 3, < 4.0",
-  "google-generativeai",
-  "pandas",
+  "shared-inference @ git+https://github.com/Enucatl/shared-inference.git",
 ]
-dynamic = ["version"]
+
+[project.scripts]
+whisper-tts = "whisper_tts.cli:main"
 
 [build-system]
-requires = [
-    "setuptools >= 61",
-    "wheel",
-    "setuptools-git-versioning",
-]
-build-backend = "setuptools.build_meta"
-
-[tools.setuptools-git-versioning]
-enabled = true
+requires = ["uv_build >= 0.12.16, < 0.13"]
+build-backend = "uv_build"
 
 [tool.ruff.lint]
 select = ["ALL"]
